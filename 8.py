@@ -11,8 +11,8 @@ def rect(A,B):
 def rotate_row(row, B):
     global screen
     newscreen = screen.copy()
-    newscreen[row][:B] = screen[row][-B:]
-    newscreen[row][B:] = screen[row][:-B]
+    newscreen[row, :B] = screen[row, -B:]
+    newscreen[row, B:] = screen[row, :-B]
     screen = newscreen
 
 def rotate_column(col, B):
@@ -48,7 +48,7 @@ with open("input8.txt") as file:
             rotate_column(int(col), int(B))
 
         else:
-            raise Error("parse error: "+line)
+            raise Exception("parse error: "+line)
 
 print(sum(sum(screen)))
 
