@@ -11,9 +11,8 @@ def hash(s):
 def sixth_digit(s):
     """ If first five digits are zero, returns 
     the sixth digit, else returns None."""
-    for i in range(5):
-        if s[i] != '0':
-            return None
+    if s[:5] != "00000":
+        return None
     return s[5] 
 
 def find_next_digit(s, i):

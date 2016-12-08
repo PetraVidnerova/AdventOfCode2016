@@ -12,11 +12,10 @@ def seven_digit(s):
     """ If first five digits are zero and the 
     sixth digit is in 0-7, returns the seventh
     digit, else returns None."""
-
-    for i in range(5):
-        if s[i] != '0':
-            return None, None
-    if s[5] >= '0' and s[5] <= '7':
+    if s[:5] != "00000":
+        return None, None
+    #if s[5] >= '0' and s[5] <= '7':
+    if '0' <= s[5] <= '7':
         return s[6], s[5]
     else:
         return None, None 
