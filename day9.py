@@ -1,42 +1,36 @@
 import re
 
-
 def decompress(compressed_string):
-    decompressed_string = ""
-    marker = False
-    marker_string = ""
-    data_sequence = ""
+    """ Returns the length of decompressed string. 
+    """
+    decompressed_len = 0
     data_count = 0
     repeat = 0
 
-    for c in compressed_string:
+    i = 0
+    while i < len(compressed_string):
 
-        if not marker:
-            if data_count > 0:
-                data_sequence += c
-                data_count -= 1
-                if data_count == 0:
-                    decompressed_string += data_sequence * repeat
-                    data_sequence = ""
-                continue
+        # read the data sequence?
+        if data_count > 0:
+            decompressed_len += data_count * repeat
+            i += data_count
+            data_count, repeat = 0, 0
+            continue
 
-            if c == '(':
-                marker = True
-                marker_string = ""
-                continue
+        # start of marker
+        regex = re.compile(r'^\(([0-9]+)x([0-9]+)\)')
+        if regex.match(compressed_string[i:]):
+            data_count, repeat = regex.search(compressed_string[i:]).groups()
+            i += len(data_count) + len(repeat) + 3
+            data_count, repeat = int(data_count), int(repeat)
+            continue
         
-            decompressed_string += c
-            
-        else:
-            #reading the marker
-            if c == ')':
-                marker = False
-                data_count, repeat = map(int,
-                                         re.search(r'([0-9]+)x([0-9]+)', marker_string).groups())
-            else:
-                marker_string += c
+        # read normal character 
+        decompressed_len += 1
+        i += 1
 
-    return decompressed_string
+    return decompressed_len
+
                 
 def test(): 
     for compressed_string in ["ADVENT", "A(1x5)BC", "(3x3)XYZ",
@@ -45,10 +39,10 @@ def test():
         decompressed_string = decompress(compressed_string)
         
         print(decompressed_string)
-        print(len(decompressed_string))
+
     
 
 if __name__ == "__main__":
     compressed_string = open("input9.txt").read().strip()
-    print(len(decompress(compressed_string)))
+    print(decompress(compressed_string))
         
