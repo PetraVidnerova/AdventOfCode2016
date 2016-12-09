@@ -49,7 +49,6 @@ def test():
     
 
 if __name__ == "__main__":
-    compressed_string = open("input9.txt").read()
-    compressed_string = compressed_string.strip()
+    compressed_string = open("input9.txt").read().strip()
     print(len(decompress(compressed_string)))
         
