@@ -22,5 +22,14 @@ class FactoryTest(unittest.TestCase):
         output = factory.run()
         self.assertEqual(output, 30)
 
+
+    def test_input(self):
+
+        factory = day10.Factory()
+        with open("input10.txt") as file:
+            factory.parse(file)
+        self.assertEqual(factory.run(), 1085)
+
+        
 if __name__ == "__main__":
     unittest.main()
