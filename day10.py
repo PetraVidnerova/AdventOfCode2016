@@ -36,20 +36,21 @@ class Factory:
         for bot, value in self.bot_values:
             if bot not in self.bots:
                 self.bots[bot] = Bot(bot)
-            print("set chip", bot, value)
+            #print("set chip", bot, value)
             self.bots[bot].set_chip(self, value)
 
-        print("Outputs", self.outputs)
-        print("bots", self.bots)
-        for i in self.bots:
-            print(i, self.bots[i])
-        
+        #print("Outputs", self.outputs)
+        #print("bots", self.bots)
+        #for i in self.bots:
+        #    print(i, self.bots[i])
+        return self.outputs[0] * self.outputs[1] * self.outputs[2]
+            
     def set_output(self, number, chip):
-        print("set ouput", number, chip)
+        #print("set ouput", number, chip)
         self.outputs[number] = chip 
 
     def set_bot(self, number, chip):
-        print("set_chip", number, chip)
+        #print("set_chip", number, chip)
         if number not in self.bots:
             self.bots[number] = Bot(number)
         self.bots[number].set_chip(self, chip)
@@ -88,7 +89,6 @@ class Bot:
             # solution of part1: 
             if self.chip1 == 17 and self.chip2 == 61:
                 print("--->", self.number)
-                quit()
                 
             if self.low_output:
                 factory.set_output(self.low, self.chip1)
@@ -105,4 +105,4 @@ if __name__ == "__main__":
     factory = Factory()
     with open("input10.txt") as file:
         factory.parse(file)
-    factory.run()
+    print(factory.run())

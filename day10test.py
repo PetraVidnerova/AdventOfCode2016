@@ -1,4 +1,4 @@
-import day10a 
+import day10
 import unittest
 
 
@@ -12,12 +12,12 @@ class FactoryTest(unittest.TestCase):
                    "value 2 goes to bot 2" ]
 
     def test_parse(self):
-        factory = day10a.Factory()
+        factory = day10.Factory()
         factory.parse(self.input_file)
     
     def test_example(self):
 
-        factory = day10a.Factory()
+        factory = day10.Factory()
         factory.parse(self.input_file)
         output = factory.run()
         self.assertEqual(output, 30)
