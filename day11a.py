@@ -64,12 +64,11 @@ class Floors:
         return False
         
     def finished(self):
-        if 'HM' in self.floors[3] and 'HG' in self.floors[3] and 'LM' in self.floors[3] and 'LG' in self.floors[3]:
-            return True
-        else:
-            return False 
-
-
+        for o in objects:
+            if o not in self.floors[3]:
+                return False
+        return True
+    
 
 
 def step(state):
