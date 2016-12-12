@@ -117,7 +117,7 @@ def test():
     print(state) 
 
     
-min = None        
+min = 312
 while True:
 
     if len(states) == 0:
