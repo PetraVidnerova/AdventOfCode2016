@@ -9,10 +9,10 @@ class Computer:
     def __init__(self):
         
         self.register = { 'a' : 0, 'b' : 0, 'c' : 0, 'd' : 0 }
-        self.instructions = [] 
+        self.program = [] 
 
     def parse(self, line):
-        """ Parse a line with one instructions, 
+        """ Parse a line with one instruction, 
             returns a triple. 
         """ 
         vals = line.strip().split()
@@ -34,8 +34,8 @@ class Computer:
 
     def read_input(self, input):
         for line in input:
-            self.instructions.append(self.parse(line))
-        self.instructions.append((END, None, None))
+            self.program.append(self.parse(line))
+        self.program.append((END, None, None))
 
     def val(self, s):
         if s in 'abcd':
@@ -44,7 +44,9 @@ class Computer:
             return int(s)
 
     def run_instr(self, instr):
-
+        """ Perform one instruction, returns False if the program ends,
+            True otherwise.
+        """
         if instr[0] == CPY:
             self.register[instr[2]] = self.val(instr[1])
             self.index += 1 
@@ -77,7 +79,7 @@ class Computer:
         self.register['c'] = c
 
         self.index = 0
-        while self.run_instr(self.instructions[self.index]):
+        while self.run_instr(self.program[self.index]):
             pass
         
         return self.register 

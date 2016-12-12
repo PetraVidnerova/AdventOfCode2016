@@ -13,9 +13,7 @@ class Example(unittest.TestCase):
     def test(self): 
         comp = day12.Computer() 
         comp.read_input(self.input)
-        reg = comp.run()
-        print(reg)
-        self.assertEqual(reg['a'], 42)
+        self.assertEqual(comp.run()['a'], 42)
 
 if __name__ == "__main__":
     unittest.main()
