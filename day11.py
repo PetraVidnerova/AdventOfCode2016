@@ -91,9 +91,7 @@ def step(state):
                 if not next_state.fires():
                     yield next_state
 
-states = [(Floors(),
-           0,
-           set([Floors()]))]
+states = [(Floors(), 0)]
 
 def test():
                         
@@ -109,13 +107,14 @@ def test():
     print(state) 
 
     
-min = None        
+min = 50 
 while True:
 
     if len(states) == 0:
         break
     
-    state, steps, path = states.pop(random.randint(0, len(states)-1))
+    #state, steps  = states.pop(random.randint(0, len(states)-1))
+    state, steps = states.pop() 
     #print(state, steps)
     #print("--->", path)
     
@@ -127,10 +126,11 @@ while True:
             print(steps+1)
             if min is None or steps+1 < min:
                 min = steps + 1
-        elif s in path:
-            # circle
-            continue
+        #elif s in path:
+        #    # circle
+        #    continue
         else:
-            new_path = path
-            new_path.add(s)
-            states.append((s, steps+1, new_path)) 
+            #new_path = path
+            #new_path.add(s)
+            #states.append((s, steps+1, new_path)) 
+            states.append((s, steps+1)) 

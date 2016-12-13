@@ -4,14 +4,8 @@ import random
 
 substances = [ 'S', 'P', 'T', 'R', 'C' ]
 objects = [ 'SM', 'PM', 'TM', 'RM', 'CM', 'SG', 'PG', 'TG', 'RG', 'CG']
-couples = [ ('SM', 'PM'), ('SM', 'TM'), ('SM', 'RM'), ('SM', 'CM'), ('SM', 'SG'), ('SM', 'PG'),
-            ('SM', 'TG'), ('SM', 'RG'), ('SM', 'CG'), ('PM', 'TM'), ('PM', 'RM'), ('PM', 'CM'),
-            ('PM', 'SG'), ('PM', 'PG'), ('PM', 'TG'), ('PM', 'RG'), ('PM', 'CG'), ('TM', 'RM'),
-            ('TM', 'CM'), ('TM', 'SG'), ('TM', 'PG'), ('TM', 'TG'), ('TM', 'RG'), ('TM', 'CG'),
-            ('RM', 'CM'), ('RM', 'SG'), ('RM', 'PG'), ('RM', 'TG'), ('RM', 'RG'), ('RM', 'CG'),
-            ('CM', 'SG'), ('CM', 'PG'), ('CM', 'TG'), ('CM', 'RG'), ('CM', 'CG'), ('SG', 'PG'),
-            ('SG', 'TG'), ('SG', 'RG'), ('SG', 'CG'), ('PG', 'TG'), ('PG', 'RG'), ('PG', 'CG'),
-            ('TG', 'RG'), ('TG', 'CG'), ('RG', 'CG') ]
+couples = list(itertools.combinations(objects, 2))
+
 
 UP = 1
 DOWN = -1
@@ -99,9 +93,7 @@ def step(state):
                     yield next_state
 
 
-states = [(Floors(),
-           0,
-           set([Floors()]))]
+states = [(Floors(), 0)]
 
 def test():
                         
@@ -117,14 +109,18 @@ def test():
     print(state) 
 
     
-min = 312
-min = 10
+min = 263 # I do not detect cycles, only paths longer than minimal 
+          # length are killed. Minimum found by random search so far. 
+min = 100 
 while True:
 
     if len(states) == 0:
         break
     
-    state, steps, path = states.pop(random.randint(0, len(states)-1))
+    #state, steps, path = states.pop(random.randint(0, len(states)-1))
+    state, steps  = states.pop(random.randint(0, len(states)-1))
+    #state, steps = states.pop()
+
     #print(state, steps)
     #print("--->", path)
     
@@ -136,11 +132,12 @@ while True:
             print(steps+1)
             if min is None or steps+1 < min:
                 min = steps + 1
-        elif s in path:
+        #elif s in path:
             # circle
-            continue
+            # continue
         else:
-            new_path = path
-            new_path.add(s)
-            states.append((s, steps+1, new_path)) 
+            #new_path = path
+            #new_path.add(s)
+            #states.append((s, steps+1, new_path)) 
+            states.append((s, steps+1)) 
 
