@@ -174,6 +174,7 @@ stack = Stack()
 stack.add( Floors(), None )
 
 edge = None
+min = 263
 while True:
     #print(stack.length())
     state = stack.active_state()
@@ -204,9 +205,11 @@ while True:
         if stack.contains_state(new_state):
             continue
         # if the state is correct add it to stack
-        if stack.length() < 263 and not new_state.fires():
+        if stack.length() < min and not new_state.fires():
             if new_state.finished():
                 print("--->", stack.length())
+                if stack.length()<min:
+                    min = stack.length()
                 continue
             #print("move successful")
             stack.add(new_state, edge)
