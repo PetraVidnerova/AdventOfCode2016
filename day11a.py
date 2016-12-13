@@ -118,6 +118,7 @@ def test():
 
     
 min = 312
+min = 10
 while True:
 
     if len(states) == 0:

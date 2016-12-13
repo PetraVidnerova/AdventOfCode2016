@@ -129,7 +129,7 @@ while True:
         continue
     
     if next_step.finished():
-        print("--->", len(path))
+        print("--->", len(path)-1)
         if min is None or len(path)<min:
             min = len(path)
         path = [ Floors() ]
