@@ -115,7 +115,7 @@ def test():
 
 path = [ Floors() ]
     
-min = 270
+min = 263  # minimum found so far 
 while True:
 
     steps = list(step(path[-1]))
