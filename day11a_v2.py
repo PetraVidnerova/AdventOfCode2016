@@ -187,7 +187,7 @@ while True:
         # toz couvnem
         edge = stack.pop()
         if edge is None:
-            break
+            break 
         continue
     else:
         #print("move", edge)
