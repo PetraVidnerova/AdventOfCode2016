@@ -1,6 +1,7 @@
 import copy
 import itertools 
 import random
+import sys
 
 substances = [ 'S', 'P', 'T', 'R', 'C' ]
 objects = [ 'SM', 'PM', 'TM', 'RM', 'CM', 'SG', 'PG', 'TG', 'RG', 'CG']
@@ -174,7 +175,7 @@ stack = Stack()
 stack.add( Floors(), None )
 
 edge = None
-min = 263
+min = 131
 while True:
     #print(stack.length())
     state = stack.active_state()
@@ -208,6 +209,7 @@ while True:
         if stack.length() < min and not new_state.fires():
             if new_state.finished():
                 print("--->", stack.length())
+                sys.stdout.flush()
                 if stack.length()<min:
                     min = stack.length()
                 continue
