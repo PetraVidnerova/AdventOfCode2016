@@ -6,6 +6,9 @@ class Disc:
         self.positions = positions
         self.start = start 
         self.state = start 
+        
+    def reset(self):
+        self.state = self.start
 
     def tick(self, steps=1):
         self.state += steps
@@ -51,7 +54,7 @@ class Statue:
     def simulate(self, starttime):
         self.ball = 0
         for d in self.discs:
-            d.state = d.start 
+            d.reset()
 
         self.tick(starttime+1)
 
