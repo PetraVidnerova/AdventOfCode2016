@@ -1,10 +1,13 @@
 import itertools 
 import numpy as np
-
+import sys
+import time 
+import scoop
 
 #initial_state = np.array([0, 0, 0, 1, 2], dtype=np.uint8)
 
-initial_state = np.array([0, 0, 0,  2, 1, 1, 0, 0, 1, 1, 1], dtype=np.uint8)
+#initial_state = np.array([0, 0, 0, 2, 1, 1, 0, 0, 1, 1, 1], dtype=np.uint8)
+initial_state = np.array([0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0], dtype=np.uint8)
 
 UP = 1
 DOWN = -1
@@ -18,8 +21,9 @@ class State:
 
     def __hash__(self):
         h = 0
+        # x is from 0 to 3, so this is unique
         for x in self.val:
-            h = 10*h + int(x)
+            h = 10*h + int(x) 
         return h 
 
     def __eq__(self, other):
@@ -97,14 +101,20 @@ def step(state):
                     yield next_state
 
 
+
 if __name__ == "__main__": 
 
     states = set()
     states.add(State())
     length = 0
+    iter_time  = 0
+
+    new_states = set()
 
     while True:
-        print(length, len(states))
+        start_time = time.time()
+        print("{0}: {1} {2:.2f}s".format(length, len(states), iter_time))
+        sys.stdout.flush()
         new_states = set()
         while states: 
             state = states.pop()
@@ -115,7 +125,7 @@ if __name__ == "__main__":
                 new_states.add(newstate) 
         states = new_states
         length += 1
-
+        iter_time = time.time() - start_time
 
 
 
