@@ -32,8 +32,10 @@ class Floors:
                     print(". ",end=" ")
             print()
         return ""
-            
-        
+
+    def __eq__(self, other): 
+        return self.__dict__ == other.__dict__
+
     def contains(self, what):
         return what in self.floors[self.elevator] 
 
