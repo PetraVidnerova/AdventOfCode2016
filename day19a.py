@@ -1,40 +1,33 @@
+from itertools import compress
 
-#num_elfes =  3017957
-num_elfes = 5 
+num_elves =  3017957
+#num_elves = 5
 
-elfes = [1] * num_elfes
-elfes = list(enumerate(elfes))
+elves = list(range(1, num_elves + 1))
 
-def legth(elfes):
+even = True
+
+while len(elves) > 1: 
     
-
-while len(elfes) > 1:
-    i = 0
-    print(elfes)
-
-    while  i < len(elfes):
-        
-        if elfes[i][1] == 0:
-            i += 1
+    length = len(elves)
+    print(length)
+    present = [ True ] * length  
+    for i in range(len(elves)):
+        if not present[i]:
             continue 
-
-        half = length(elfes) // 2
+        half = length // 2 
         j = i + half
+        k = i  
+        while j > 0:
+            k += 1 
+            if k >= len(elves):
+                k -= len(elves)
+            if present[k]: 
+                j -= 1
+        present[k] = False
+        length -= 1 
+    
+    elves = list(compress(elves, present))
 
-        if j < len(elfes):
-            elfes[j] = (elfes[j][0], 0)
-        else:
-            j -= len(elfes)
-            k, l = 0, 0
-            while k < j:
-                if elfes[l][1] != 0:
-                    k += 1
-                l += 1
-            elfes[l] = (elfes[l][0], 0)
-        i += 1
-
-    elfes = list(filter(lambda x: x[1] != 0, elfes))
-        
-print(elfes)
-
+print(elves)
 
