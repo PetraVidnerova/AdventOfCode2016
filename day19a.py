@@ -10,23 +10,21 @@ even = True
 while len(elves) > 1: 
     
     length = len(elves)
-    print(length)
     present = [ True ] * length  
+    print(length)
+    deleted = 0  # number of elves to skip
     for i in range(len(elves)):
         if not present[i]:
+            deleted -= 1
             continue 
         half = length // 2 
-        j = i + half
-        k = i  
-        while j > 0:
-            k += 1 
-            if k >= len(elves):
-                k -= len(elves)
-            if present[k]: 
-                j -= 1
+        k = i + half + deleted 
+        if k >= len(elves):
+            k -= len(elves)
         present[k] = False
-        length -= 1 
-    
+        length -= 1
+        deleted += 1 
+        
     elves = list(compress(elves, present))
 
 print(elves)
