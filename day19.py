@@ -1,22 +1,24 @@
-
 num_elfes =  3017957
-elfes = [ 1 ] * num_elfes 
-elfes = list(enumerate(elfes)) 
+#num_elfes = 5
 
+elfes = list(range(1, num_elfes + 1))
 
-while len(elfes) > 1:
+even = True
 
-    for i in range(len(elfes)-1):
-        if elfes[i][1] == 0:
-            continue 
-        elfes[i+1] = (elfes[i+1][0], 0)
+while len(elfes) > 1: 
 
-    if elfes[-1][1] != 0:
-        elfes[0] = (elfes[0][0], 0) 
+    #print(elfes)
+    if len(elfes) % 2 == 0:
+        new_even = even
+    else:
+        new_even = not even 
 
-    elfes = list(filter(lambda x: x[1] != 0, elfes))
+    if even:
+        elfes = elfes[0::2]
+    else:
+        elfes = elfes[1::2] 
+    even = new_even
 
 
 print(elfes)
-
 
