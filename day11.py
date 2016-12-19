@@ -2,7 +2,7 @@ import itertools
 import numpy as np
 import sys
 import time 
-import scoop
+
 
 #initial_state = np.array([0, 0, 0, 1, 2], dtype=np.uint8)
 
