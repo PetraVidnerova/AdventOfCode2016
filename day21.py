@@ -1,11 +1,9 @@
-from functools import reduce 
 import re 
 
 def swap(s, x, y):
-    s = list(s)
-    s[x], s[y] = s[y], s[x] 
-    s = reduce(lambda x, y: x + y, s)
-    return s 
+    if x > y:
+        x, y = y, x 
+    return s[:x] + s[y] + s[x+1:y] + s[x] + s[y+1:]
 
 def swap_letters(s, a, b):
     s = s.replace(a, '?')
@@ -24,16 +22,9 @@ def rotate_right(s, x):
     return s[-x:] + s[:-x]
 
 
-def getindex(s, x):
-    i = 0
-    while i < len(s):
-        if s[i] == x:
-            return i
-        i += 1
-    return -1
     
 def rotate_position(s, x):
-    index = getindex(s, x)
+    index = s.find(x)
     if index >= 4:
         index += 1
     index += 1 

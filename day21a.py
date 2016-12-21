@@ -1,4 +1,3 @@
-from functools import reduce 
 import re 
 import day21 
 
